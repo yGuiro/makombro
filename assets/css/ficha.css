@@ -1,0 +1,57 @@
+body {
+    background-image: url('../images/490274.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+
+}
+
+textarea {
+    padding-left: 15px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    box-shadow: 5px 5px 4px #888888;
+
+}
+.mod {
+    width: 40px;
+    padding-left: 10px;
+    border-radius: 30px;
+}
+
+form {
+    /* border-radius: 10px; */
+    background-color: white;
+    border: 2px solid black;
+    max-width: 670px !important;
+    box-shadow: 10px 10px 5px #2c2b2b;
+}
+
+.lbl {
+    color: white;
+    padding-left: 25px;
+    border-radius: 15px;
+    background-color: black; 
+}
+
+.valor {
+    border: none; 
+    color: white;
+    background-color: black; 
+    
+}
+
+.nnr {
+    padding-left: 15px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    box-shadow: 5px 5px 4px #888888;
+}
+
+.btn-login {
+    background: #EE82EE !important;
+    color: black !important;
+    border: 1px solid !important;
+    text-decoration: none;
+}

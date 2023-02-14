@@ -12,7 +12,7 @@ if ($result->rowCount() > 0) {
     $_SESSION['logado'] = true;
     $_SESSION['user'] = $user;
     
-    echo json_encode(["icon" => "success", "title" => "Login", "text" => "Login realizado com sucesso!", "login" => true]);
+    echo json_encode(["icon" => "success", "title" => "Login", "text" => "Login realizado com sucesso!", "Login" => true]);
 } else {
-    echo json_encode(["icon" => "error", "title" => "Opsss...", "text" => "Erro ao realizar login", "login" => false]);
+    echo json_encode(["icon" => "error", "title" => "Opsss...", "text" => "Erro ao realizar login", "Fechar" => false]);
 }

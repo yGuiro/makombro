@@ -35,7 +35,15 @@ h3 {
     background: #EE82EE !important;
     color: black !important;
     border: 1px solid !important;
+    text-decoration: none;
     /* margin-bottom: 30% !important; */
+}
+
+#btn-a {
+    background: #EE82EE !important;
+    color: black !important;
+    border: 1px solid !important;
+    text-decoration: none;
 }
 
 #select {

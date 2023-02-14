@@ -1,0 +1,81 @@
+
+
+.wrap {
+    text-align: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+dice-roll {
+    background: rgba(0, 0, 0, 0) no-repeat center center;
+    box-shadow: rgba(255, 255, 255, 0.233) 0 0.5px 0 0.5px;
+    background-size: 80%;
+    margin: 10px;
+    position: relative;
+    user-select: white;
+}
+
+dice-roll::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+dice-roll[sides="4"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d4_128x128.png');
+}
+
+dice-roll[sides="6"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d6_128x128.png');
+}
+
+dice-roll[sides="8"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d8_128x128.png');
+}
+
+dice-roll[sides="10"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d10_128x128.png');
+}
+
+dice-roll[sides="12"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d12_128x128.png');
+}
+
+dice-roll[sides="20"] {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/d20_128x128.png');
+}
+
+dice-roll[sides="100"]::shadow .die-num::after {
+    content: '%';
+}
+
+.roll-all {
+    align-items: center;
+    border: 1px solid #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    user-select: white;
+    background: black no-repeat center center;
+    outline: none;
+}
+
+.roll-all span {
+    color: #888;
+    font-family: serif;
+    font-size: 28px;
+}
+
+audio {
+    display: none;
+}
