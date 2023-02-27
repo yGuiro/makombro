@@ -61,8 +61,11 @@
                 <dice-roll sides="20"></dice-roll>
             </div>
         </div>
-
-        <audio src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/dice.mp3" id="die-sound"></audio>
+    </div>
+    
+    <!-- FICHA -->
+    <div id="ficha">
+        <a href="./ficha.html" class="btn btn-primary" type="button">Criar uma ficha</a>
     </div>
     </div>
 </body>
