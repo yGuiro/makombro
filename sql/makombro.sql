@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `tb_aux_adventureplayers` (
 CREATE TABLE IF NOT EXISTS `tb_sheet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `adventure_id` int(11) DEFAULT NULL,
+  `adventure` int(11) NOT NULL DEFAULT 0,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` int(11) NOT NULL,
   `race` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -77,10 +77,10 @@ CREATE TABLE IF NOT EXISTS `tb_sheet` (
   `bag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `FK_tb_sheet_tb_users` (`user_id`),
-  KEY `FK_tb_sheet_tb_adventure` (`adventure_id`),
-  CONSTRAINT `FK_tb_sheet_tb_adventure` FOREIGN KEY (`adventure_id`) REFERENCES `tb_adventure` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `FK_tb_sheet_tb_adventure` (`adventure`),
+  CONSTRAINT `FK_tb_sheet_tb_adventure` FOREIGN KEY (`adventure`) REFERENCES `tb_adventure` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tb_sheet_tb_users` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 

@@ -17,7 +17,6 @@ body {
     justify-content: space-between;
 }
 
-#ficha {
-    display: flex;
-    justify-content: flex-end;
+i {
+    color: #EE82EE !important;
 }

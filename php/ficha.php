@@ -1,4 +1,10 @@
 <?php
+
+
+
+
+try {
+   
 include "./conexao.php";
 
 $user_id =  $_SESSION['id_user'];
@@ -29,10 +35,15 @@ $abilities = $_POST['abilities'];
 $weapons = $_POST['weapons'];
 $skills = $_POST['skills'];
 $bag = $_POST['bag'];
+$adventure = $_POST['mesa'];
 
+$abacate_doce = $pdo->prepare("SELECT id FROM tb_adventure WHERE name = '$adventure'");
+$abacate_doce->execute();
+$linha = $abacate_doce->fetch(PDO::FETCH_ASSOC);
+$adventure_id = $linha['id'];
 
 $result = $pdo->prepare(
-    "INSERT INTO `tb_sheet` (`user_id`, `name`, `level`, `race`, `class`, `hp_max`, `strength`, `dexterity`, `constitution`, `inteligence`, `wisdom`, `charisma`, `armor`, `initiative`, `force`, `reflex`, `will`, `strength_mod`, `dexterity_mod`, `constitution_mod`, `inteligence_mod`, `wisdom_mod`, `charisma_mod`, `abilities`, `weapons`, `skills`, `bag`) VALUE ($user_id ,'$name', $level, '$race', '$class', $hp_max, $strength, $dexterity, $constitution, $intelligence, $wisdom, $charisma, $armor, $initiative, $force, $reflex, $will, $strength_mod, $dexterity_mod, $constitution_mod, $intelligence_mod, $wisdom_mod, $charisma_mod, '$abilities', '$weapons', '$skills', '$bag')");
+    "INSERT INTO `tb_sheet` (`user_id`,`adventure`, `name`, `level`, `race`, `class`, `hp_max`, `strength`, `dexterity`, `constitution`, `inteligence`, `wisdom`, `charisma`, `armor`, `initiative`, `force`, `reflex`, `will`, `strength_mod`, `dexterity_mod`, `constitution_mod`, `inteligence_mod`, `wisdom_mod`, `charisma_mod`, `abilities`, `weapons`, `skills`, `bag`) VALUE ($user_id ,'$adventure_id','$name', $level, '$race', '$class', $hp_max, $strength, $dexterity, $constitution, $intelligence, $wisdom, $charisma, $armor, $initiative, $force, $reflex, $will, $strength_mod, $dexterity_mod, $constitution_mod, $intelligence_mod, $wisdom_mod, $charisma_mod, '$abilities', '$weapons', '$skills', '$bag')");
 
 $result->execute();
 
@@ -41,3 +52,8 @@ if ($result->rowCount() > 0) {
 } else {
     echo json_encode(["icon" => "error", "title" => "Opsss...", "text" => "Erro ao atualizar ficha", "login" => false]);
 }
+
+} catch (\Throwable $th) {
+    throw $th;
+}
+
