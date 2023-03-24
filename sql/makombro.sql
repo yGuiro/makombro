@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `tb_sheet` (
   `race` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hp_max` int(11) NOT NULL,
+  `hp` int(11) NOT NULL,
   `strength` int(11) NOT NULL,
   `dexterity` int(11) NOT NULL,
   `constitution` int(11) NOT NULL,
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `tb_sheet` (
   KEY `FK_tb_sheet_tb_adventure` (`adventure`),
   CONSTRAINT `FK_tb_sheet_tb_adventure` FOREIGN KEY (`adventure`) REFERENCES `tb_adventure` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_tb_sheet_tb_users` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 

@@ -82,34 +82,34 @@
     $linha = $abacate_doce->fetch(PDO::FETCH_ASSOC);
     $adventure_id = $linha['id'];
 
-    
-    $banana = $pdo->prepare("SELECT name FROM tb_sheet WHERE user_id = '$login' AND adventure = '$adventure_id'");
+
+    $banana = $pdo->prepare("SELECT name, id FROM tb_sheet WHERE user_id = '$login' AND adventure = '$adventure_id'");
     $banana->execute();
-    
+
     $sql = "SELECT ts.id FROM tb_sheet ts WHERE user_id = '$login' AND adventure = '$adventure_id'";
     $consulta = $pdo->query($sql);
     while ($linha = $banana->fetch(PDO::FETCH_ASSOC)) {
-        // $help = $banana->fetch(PDO::FETCH_ASSOC);
-        // $sheet = $linha['id'];
-    
+
         // PUXAR NOME
-        
+
         $nome_ficha = $linha['name'];
+        $id_ficha = $linha['id'];
         echo '<div class="d-flex justify-content-end me-1" style="color: white;">'
-                . $nome_ficha .'
-                <button id="btnFicha" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            . $nome_ficha . '
+                <button id="btnFicha" type="button" class="btn btn-primary" onclick="fichaUser('. $id_ficha .')" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-sharp fa-solid fa-file-lines fa-2xl"></i>
                 </button>
             </div>';
+
     }
 
 
     ?>
-    <?php 
+    <?php
     $arroz_doce = $pdo->prepare("SELECT name FROM tb_adventure WHERE id = '$adventure_id'");
     $arroz_doce->execute();
     $socorro = $arroz_doce->fetch(PDO::FETCH_ASSOC);
-    
+
     $nome_aventura = $socorro['name'];
 
 
@@ -124,13 +124,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- FICHA -->
+                <?php
+
+                $sheet_id = $pdo -> prepare("SELECT id FROM tb_sheet WHERE user_id = '$login' AND adventure = '$adventure_id'");
+                $sheet_id -> execute();
+                $linha2 = $sheet_id -> fetch(PDO::FETCH_ASSOC);
+                $nome = $linha2['id'];
+
+                // echo $nome;
+
+
+                ?>
                 <div class="modal-body">
                     <div style=" display: flex; justify-content: space-around;">
                         <div class="d-flex justify-content-between">
-                            <form class="container-md" id="form" action="">
+                            <form class="container-md" id="form-update" action="">
                                 <!-- <input type="text" hidden id="mesa" name="mesa" value="<?php echo $_GET['mesa']; ?>"> -->
                                 <div class="d-flex justify-content-between mt-2">
                                     <!-- NOME -->
+                                    <input type="hidden" name="id_update" id="id_update">
                                     <div>
                                         <label class="d-flex justify-content-center me-4" for="nome">NOME</label>
                                         <input type="text" name="name" class="nnr ms-2" style="width: 90%;" id="name">
@@ -143,7 +155,7 @@
                                     <!-- RACA -->
                                     <div>
                                         <label class="d-flex ms-5" for="raca">RAÇA</label>
-                                        <input type="text" name="race" id="raca" style="width: 80%;" class="nnr" id="race">
+                                        <input type="text" name="race" id="raca" style="width: 80%;" class="nnr">
                                     </div>
                                 </div>
 
@@ -162,7 +174,7 @@
 
                                     <!-- INPUTR HP -->
                                     <div class="d-flex justify-content-end">
-                                        <input type="number" name="hp" class="nnr d-flex" style="width: 15%;">
+                                        <input type="number" name="hp" class="nnr d-flex" style="width: 15%;" id="hp">
                                         <input type="number" name="hp_max" class="nnr me-3" style="width: 15%;" id="hp_max">
                                     </div>
                                 </div>
@@ -217,7 +229,7 @@
                                     <!-- VIGOR -->
                                     <div class="d-flex justify-content-end">
                                         <label class="lbl me-5" for="vigor">Vigor:
-                                            <input type="number" name="force" class="mod valor" style="margin-right: 2rem;"id="force">
+                                            <input type="number" name="force" class="mod valor" style="margin-right: 2rem;" id="force">
                                         </label>
                                     </div>
                                 </div>
@@ -278,7 +290,7 @@
 
                                     <!-- ARMAS -->
                                     <div>
-                                        <textarea name="weapons" id="" cols="25" rows="10" id="weapons"></textarea>
+                                        <textarea name="weapons" cols="25" rows="10" id="weapons"></textarea>
                                     </div>
                                 </div>
 
@@ -293,11 +305,11 @@
                                 <div class="d-flex justify-content-between my-2">
 
                                     <!-- PERICIAS -->
-                                    <textarea name="skills" id="" cols="25" rows="10" id="skills"></textarea>
+                                    <textarea name="skills" cols="25" rows="10" id="skills"></textarea>
 
                                     <!-- BOLSA -->
                                     <div>
-                                        <textarea name="bag" id="" cols="25" rows="10" id="bag"></textarea>
+                                        <textarea name="bag" cols="25" rows="10" id="bag"></textarea>
                                     </div>
                                 </div>
 
@@ -318,7 +330,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button> -->
-                    <button type="button" class="btn btn-primary">Editar</button>
+                    <button type="button" class="btn btn-primary" onclick="fichaUpdate()">Editar</button>
                 </div>
             </div>
         </div>
@@ -336,6 +348,7 @@
 <script src="../assets/js/jquery-3.6.3.min.js"></script>
 <script src="../assets/js/dice.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     $(document).ready(function() {
         const queryString = window.location.search;
@@ -346,7 +359,69 @@
 
     });
 
+    function fichaUser(id) { 
+        $.ajax({
+            url: '../php/fichaGet.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+                // typeRes: 'get'
+            },
+            success: function(data) {
+                console.log(data)
+                $('#id_update').val(data.id)
+                $('#name').val(data.name)
+                $('#level').val(data.level)
+                $('#class').val(data.class)
+                $('#raca').val(data.race)
+                $('#strength').val(data.strength)
+                $('#armor').val(data.armor)
+                $('#initiative').val(data.initiative)
+                $('#force').val(data.force)
+                $('#strength_mod').val(data.strength_mod)
+                $('#dexterity').val(data.dexterity)
+                $('#dexterity_mod').val(data.dexterity_mod)
+                $('#constitution').val(data.constitution)
+                $('#constitution_mod').val(data.constitution_mod)
+                $('#inteligence').val(data.inteligence)
+                $('#inteligence_mod').val(data.inteligence_mod)
+                $('#wisdom').val(data.wisdom)
+                $('#wisdom_mod').val(data.wisdom_mod)
+                $('#charisma').val(data.charisma)
+                $('#charisma_mod').val(data.charisma_mod)
+                $('#hp').val(data.hp)
+                $('#hp_max').val(data.hp_max)
+                $('#init').val(data.init)
+                $('#reflex').val(data.reflex)
+                $('#will').val(data.will)
+                $('#skills').val(data.skills)
+                $('#abilities').val(data.abilities)
+                $('#weapons').val(data.weapons)
+                $('#bag').val(data.bag)
+            }
+        })
+    }
 
+    function fichaUpdate() {
+        $.ajax({
+            url: '../php/update.php',
+            type: 'POST',
+            dataType: 'json',
+            data: $('#form-update').serialize(),
+            success: function(data) {
+                Swal.fire({
+                    icon: data.icon,
+                    title: data.title,
+                    showConfirmButton: true,
+                    // timer: 1500
+                }).then(() => {
+                    location.reload()
+                })
+                location.reload()
+            }
+        })
+    }
 </script>
 
 </html>
