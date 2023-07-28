@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.4.25-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           10.4.28-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              12.3.0.6589
+-- HeidiSQL Versão:              12.5.0.6677
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -22,19 +22,19 @@ USE `makombro`;
 -- Copiando estrutura para tabela makombro.tb_adventure
 CREATE TABLE IF NOT EXISTS `tb_adventure` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `system` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `system` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela makombro.tb_adventure: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela makombro.tb_aux_adventureplayers
 CREATE TABLE IF NOT EXISTS `tb_aux_adventureplayers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `adventure` int(11) NOT NULL,
   `players` int(11) NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK__tb_adventure` (`adventure`),
   KEY `FK_tb_aux_adventureplayers_tb_users` (`players`),
@@ -42,17 +42,17 @@ CREATE TABLE IF NOT EXISTS `tb_aux_adventureplayers` (
   CONSTRAINT `FK_tb_aux_adventureplayers_tb_users` FOREIGN KEY (`players`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela makombro.tb_aux_adventureplayers: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela makombro.tb_sheet
 CREATE TABLE IF NOT EXISTS `tb_sheet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `adventure` int(11) NOT NULL DEFAULT 0,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
-  `race` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `race` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
   `hp_max` int(11) NOT NULL,
   `hp` int(11) NOT NULL,
   `strength` int(11) NOT NULL,
@@ -72,10 +72,10 @@ CREATE TABLE IF NOT EXISTS `tb_sheet` (
   `inteligence_mod` int(11) NOT NULL,
   `wisdom_mod` int(11) NOT NULL,
   `charisma_mod` int(11) NOT NULL,
-  `abilities` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `weapons` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `bag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `abilities` varchar(255) NOT NULL DEFAULT '',
+  `weapons` varchar(255) NOT NULL DEFAULT '',
+  `skills` varchar(255) NOT NULL DEFAULT '',
+  `bag` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `FK_tb_sheet_tb_users` (`user_id`),
   KEY `FK_tb_sheet_tb_adventure` (`adventure`),
@@ -83,17 +83,19 @@ CREATE TABLE IF NOT EXISTS `tb_sheet` (
   CONSTRAINT `FK_tb_sheet_tb_users` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela makombro.tb_sheet: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela makombro.tb_users
 CREATE TABLE IF NOT EXISTS `tb_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela makombro.tb_users: ~1 rows (aproximadamente)
+INSERT INTO `tb_users` (`id`, `user`, `password`) VALUES
+	(4, 'Guiro', '123');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
